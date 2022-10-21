@@ -74,7 +74,9 @@ export function rangesByName(data: vscode.SemanticTokens, legend: vscode.Semanti
 		column += deltaColumn
 		const range = new vscode.Range(line, column, line, column + length)
 		const name = editor.document.getText(range)
+		// Look up token type keyword by numeric index
 		const kind = legend.tokenTypes[kindIndex]
+		// Is it a "variable" "parameter" or "property" type
 		if (tokenKinds.has(kind)) {
 			pushValue(accumulator, name, range)
 		}

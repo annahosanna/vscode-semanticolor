@@ -6,31 +6,32 @@ import { generatePalette } from "./configuration"
 
 const colorizeIfNeeded = debounce(colorize, 200)
 
+// Hmm this does not look like its used
 interface SemanticToken {
 	name: string
 	range: vscode.Range
 }
 
 function handleActiveEditorChange(editor: vscode.TextEditor | undefined) {
-	if (editor == null) {
-		return
+	if (!!editor) {
+		colorizeIfNeeded(editor)
 	}
-
-	colorizeIfNeeded(editor)
 }
 
 function handleColorThemeChange() {
 	generatePalette()
 	const editor = vscode.window.activeTextEditor
-	if (editor != null) { 
+	if (!!editor) {
 		colorizeIfNeeded(editor)
 	}
 }
 
 function handleTextDocumentChange(event: vscode.TextDocumentChangeEvent) {
-	const editor = vscode.window.activeTextEditor
-	if (editor != null && editor.document === event.document) {
-		colorizeIfNeeded(editor)
+	if (!!vscode.window.activeTextEditor) {
+		const editor = vscode.window.activeTextEditor
+		if (!!editor && editor.document === event.document) {
+			colorizeIfNeeded(editor)
+		}
 	}
 }
 
@@ -41,10 +42,10 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(handleTextDocumentChange))
 	context.subscriptions.push(vscode.window.onDidChangeActiveColorTheme(handleColorThemeChange))
 
-	const editor = vscode.window.activeTextEditor
-	if (editor != null) {
+	if (!!vscode.window.activeTextEditor) {
+		const editor = vscode.window.activeTextEditor
 		colorizeIfNeeded(editor)
 	}
 }
 
-export function deactivate() {}
+export function deactivate() { }
