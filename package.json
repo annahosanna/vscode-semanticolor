@@ -1,13 +1,13 @@
 {
-  "name": "vscode-color-identifiers-mode",
+  "name": "vscode-semanticolor",
   "displayName": "Color Identifiers",
   "description": "Gives each identifier a distinct color.",
   "version": "1.2.0",
   "license": "GPL-3.0-or-later",
-  "publisher": "MatthewNespor",
+  "publisher": "annahosanna",
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/mnespor/vscode-color-identifiers-mode.git"
+    "url": "https://www.github.com/annahosanna/vscode-semanticolor.git"
   },
   "icon": "images/icon.png",
   "engines": {
