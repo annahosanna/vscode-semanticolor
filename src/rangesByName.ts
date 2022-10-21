@@ -77,6 +77,7 @@ export function rangesByName(data: vscode.SemanticTokens, legend: vscode.Semanti
 		// Look up token type keyword by numeric index
 		const kind = legend.tokenTypes[kindIndex]
 		// Is it a "variable" "parameter" or "property" type
+		// range is of type vscode.Range
 		if (tokenKinds.has(kind)) {
 			pushValue(accumulator, name, range)
 		}

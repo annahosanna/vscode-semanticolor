@@ -13,6 +13,7 @@ const PaletteMode = {
 }
 
 export function updateConfiguration() {
+	// using a ternay operator instead of a null coalescing operator
 	const configuration = !!vscode.workspace.getConfiguration('colorIdentifiersMode') ? vscode.workspace.getConfiguration('colorIdentifiersMode') : {};
 	tokenKinds = !!configuration.get('tokenKinds') ? new Set(configuration.get('tokenKinds')) : new Set([]);
 	ignoredLanguages = !!configuration.get('ignoredLanguages') ? new Set(configuration.get('ignoredLanguages')) : new Set([]);
@@ -22,12 +23,10 @@ export function updateConfiguration() {
 }
 
 // https://blog.devgenius.io/when-to-use-null-undefined-or-empty-array-d45244ffc565
-// ?? colessing operator "not null" ?? "if null"
-// [] = new Array<type>()
-// !!variable test for false like (return false if null or undefined)
-//
-// Getter/Setter:
-// const var_name: Type = value
+// ?? null coalescing operator "not null" ?? "if null"
+// [] is the same as new Array<type>()
+// !!variable A syntax to test for false like variables which return false if null or undefined
+// const var_name: Type = expression
 export function generatePalette() {
 	colors.forEach(color => color.dispose())
 	switch (paletteMode) {

@@ -15,14 +15,22 @@ interface SemanticToken {
 function handleActiveEditorChange(editor: vscode.TextEditor | undefined) {
 	if (!!editor) {
 		colorizeIfNeeded(editor)
+	} else {
+		const logMessage: string = "vscode.TextEditor is undefined in handleActiveEditorChange"
+		vscode.window.showInformationMessage(logMessage)
+		// console.log(logMessage)
 	}
 }
 
 function handleColorThemeChange() {
 	generatePalette()
-	const editor = vscode.window.activeTextEditor
-	if (!!editor) {
+	if (!!vscode.window.activeTextEditor) {
+		const editor = vscode.window.activeTextEditor
 		colorizeIfNeeded(editor)
+	} else {
+		const logMessage: string = "vscode.window.activeTextEditor is undefined in handleColorThemeChange"
+		vscode.window.showInformationMessage(logMessage)
+		// console.log(logMessage)
 	}
 }
 
@@ -32,6 +40,15 @@ function handleTextDocumentChange(event: vscode.TextDocumentChangeEvent) {
 		if (!!editor && editor.document === event.document) {
 			colorizeIfNeeded(editor)
 		}
+		//  else {
+		// 	const logMessage: string = "The changed document was not the active document inhandleTextDocumentChange"
+		// 	vscode.window.showInformationMessage(logMessage)
+		// 	// console.log(logMessage)
+		// }
+	} else {
+		const logMessage: string = "vscode.window.activeTextEditor is undefined in handleTextDocumentChange"
+		vscode.window.showInformationMessage(logMessage)
+		// console.log(logMessage)
 	}
 }
 
