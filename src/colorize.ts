@@ -1,15 +1,15 @@
 import * as vscode from 'vscode'
 import * as murmurhash from 'murmurhash'
 import { rangesByName } from './rangesByName'
-import { colors, ignoredLanguages, method, Method } from "./configuration"
+import { colors, ignoredLanguages, method, theMethod } from "./configuration"
 
 let rangeLists: vscode.Range[][] = colors.map(_ => [])
 
 function colorIndexOfSymbol(symbolName: string, symbolIndex: number): number {
 	switch (method) {
-		case Method.hash:
+		case theMethod.hash:
 			return murmurhash.v3(symbolName) % rangeLists.length
-		case Method.sequential:
+		case theMethod.sequential:
 		default:
 			return symbolIndex % rangeLists.length
 	}
