@@ -77,8 +77,10 @@ export function generatePalette() {
 			const saturation = 90
 			const luminance = vscode.window.activeColorTheme.kind === ColorThemeKind.Light ? 30 : 80
 			// Colors is a map of TextEditorDecorationType for 10 colors
+			// Hue could really be split into 640 shades (assuming 320 is max)
+			// Hue goes to 360, but that is the same as hue 0, so max out a little low.
 			colors = [0.0, 0.5, 0.1, 0.6, 0.2, 0.7, 0.3, 0.8, 0.4, 0.9].map(hue => {
-				const hex = colorConvert.hsl.hex([360.0 * hue, saturation, luminance])
+				const hex = colorConvert.hsl.hex([320.0 * hue, saturation, luminance])
 				return vscode.window.createTextEditorDecorationType({ color: `#${hex}` })
 			})
 	}
